@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./poc:/usr/poc/
+    working_dir: /usr/poc/
+    pid: "host"     # PID
+    cap_add:        # Capabilities
+      - SYS_PTRACE
+    tty: true
+
