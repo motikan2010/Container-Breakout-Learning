@@ -10,6 +10,8 @@ It is explaining the "Container Breakout" when the "`--pid=host`" and "`--cap-ad
 
 ## Environment
 
+Tried on Amazon Linux 2023.
+
 ```
 # uname -a
 Linux ip-172-31-33-251.ap-northeast-1.compute.internal 6.1.27-43.48.amzn2023.x86_64 #1 SMP PREEMPT_DYNAMIC Tue May  2 04:53:36 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
@@ -19,6 +21,9 @@ Docker version 20.10.23, build 7155243
 ```
 
 ### Preparation
+
+Starts an HTTP server on the host machine.  
+After, Execute a "Process injection Attack" against this process.
 
 ```
 # python3 -m http.server 10080 &
