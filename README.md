@@ -1,12 +1,14 @@
 # Container Breakout Learning
 
-"Container Breakout" learning application
+"Container Breakout" learning application.
 
-### Reference
+It is explaining the "Container Breakout" when the "`--pid=host`" and "`--cap-add=SYS_PTRACE`" options are specified at container startup.
+
+## Reference
 
 [Container Breakout – Part 1](https://tbhaxor.com/container-breakout-part-1/#lab-process-injection)
 
-### Environment
+## Environment
 
 ```
 # uname -a
@@ -16,7 +18,7 @@ Linux ip-172-31-33-251.ap-northeast-1.compute.internal 6.1.27-43.48.amzn2023.x86
 Docker version 20.10.23, build 7155243
 ```
 
-#### Preparation
+### Preparation
 
 ```
 # python3 -m http.server 10080 &
@@ -33,7 +35,7 @@ root       74067  0.0  0.9 241204 18056 pts/1    S    14:31   0:00 /root/.pyenv/
 root       78647  0.0  0.1 232520  2776 pts/1    R+   14:46   0:00 ps au
 ```
 
-### Run
+## Run
 
 ```
 -- Run container
@@ -43,11 +45,18 @@ root       78647  0.0  0.1 232520  2776 pts/1    R+   14:46   0:00 ps au
 # make app
 ```
 
-#### Pattern 1
+| Setting Pattern | Container Breakout |
+| - | - |
+| Pattern 1 | Fail |
+| Pattern 2 | Fail |
+| Pattern 3 | Fail |
+| Pattern 4 | **Succeed** |
+
+### Pattern 1
 
 | Vulnerability Args | |
 | - | - |
-| -pid=host | x |
+| --pid=host | x |
 | --cap-add=SYS_PTRACE | x |
 
 ```
@@ -77,13 +86,11 @@ root@b1e9750ed68c:/usr/poc# ./infect 74067
 ptrace(ATTACH):: No such process
 ```
 
-
-
-#### Pattern 2
+### Pattern 2
 
 | Vulnerability Setting | |
 | - | - |
-| -pid=host | x |
+| --pid=host | x |
 | --cap-add=SYS_PTRACE | o |
 
 ```
@@ -114,11 +121,11 @@ ptrace(ATTACH):: No such process
 ```
 
 
-#### Pattern 3
+### Pattern 3
 
 | Vulnerability Setting | |
 | - | - |
-| -pid=host | o |
+| --pid=host | o |
 | --cap-add=SYS_PTRACE | x |
 
 ```
@@ -157,11 +164,11 @@ root@f71f748ca3c7:/usr/poc# ./infect 74067
 ptrace(ATTACH):: Operation not permitted
 ```
 
-#### Pattern 4
+### Pattern 4
 
 | Vulnerability Setting | |
 | - | - |
-| -pid=host | o |
+| --pid=host | o |
 | --cap-add=SYS_PTRACE | o |
 
 ```
